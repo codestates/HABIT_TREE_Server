@@ -9,8 +9,7 @@ assignees: 'Hyunsoo-Dev, sosick0418'
 
 ### ISSUE
 - Group: `server`
-- Type: `bug`, `feature`, `delete`
-- Detail: 
+- Type:`feature`
 
 ### TODO
 1. 
@@ -18,12 +17,9 @@ assignees: 'Hyunsoo-Dev, sosick0418'
 3.
 
 ### Estimated time
-> Pick one
-### `1h`
-### `2h`
 ### `3h`
 
 ### Labels
-- Estimated time: `E: 1h`
+- Estimated time: `E: 3h`
 - Group : `server`
-- Urgency: `High`, `Middle`, `Low`
+- Urgency: `High`
