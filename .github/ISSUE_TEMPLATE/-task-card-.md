@@ -2,7 +2,7 @@
 name: "[Task Card]"
 about: Suggest an idea for this project
 title: "[Task] "
-labels: 'server, NestJS'
+labels: 'server, E:3h'
 assignees: 'Hyunsoo-Dev, sosick0418'
 
 ---
