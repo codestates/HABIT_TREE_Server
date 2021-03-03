@@ -57,6 +57,11 @@ export class UsersController {
     return this.usersService.create(body);
   }
 
+  @UseGuards(AuthGuard('jwt'))
+  @Post('update')
+  update(@Body('password') password: string, @Req() req: any): Promise<any> {
+    return this.usersService.update(password, req.user.id);
+  }
   /**
    * user + habit 조인 쿼리
    */

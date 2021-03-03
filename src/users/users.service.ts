@@ -29,6 +29,9 @@ export class UsersService {
     return await this.usersRepository.save(this.usersRepository.create(body));
   }
 
+  async update(password, id): Promise<any> {
+    return await this.usersRepository.update(id, { password: password });
+  }
   findOneJoin(id: string): Promise<User> {
     return this.usersRepository.findOne({
       relations: ['habits'],
