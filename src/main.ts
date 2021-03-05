@@ -2,7 +2,8 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import fs from 'fs';
+import * as fs from 'fs';
+import * as morgan from 'morgan';
 
 async function bootstrap() {
   const httpsOptions = {
@@ -12,6 +13,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     httpsOptions,
   });
+
+  app.use(morgan('dev'));
 
   app.enableCors({
     origin: 'https://localhost:3000',

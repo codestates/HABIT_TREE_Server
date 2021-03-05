@@ -10,16 +10,8 @@ import { UsersController } from './users/users.controller';
 import { UsersService } from './users/users.service';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth/auth.service';
-import { MorganModule, MorganInterceptor } from 'nest-morgan';
-import { APP_INTERCEPTOR } from '@nestjs/core';
 @Module({
-  imports: [
-    TypeOrmModule.forRoot(),
-    UsersModule,
-    HabitsModule,
-    ForestModule,
-    MorganModule.forRoot(),
-  ],
+  imports: [TypeOrmModule.forRoot(), UsersModule, HabitsModule, ForestModule],
   controllers: [AppController],
   providers: [AppService],
 })
