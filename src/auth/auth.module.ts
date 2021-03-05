@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
 import { Kakao } from './kakao.strategy';
 import { LocalStrategy } from './local.strategy';
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 dotenv.config();
 
 @Module({
