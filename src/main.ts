@@ -17,8 +17,11 @@ async function bootstrap() {
   app.use(morgan('dev'));
 
   app.enableCors({
-    origin: 'https://localhost:3000',
+    origin: ['https://localhost:3000'],
+    methods: ['GET', 'POST', 'OPTIONS', 'DELETE'],
+    credentials: true,
   });
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
