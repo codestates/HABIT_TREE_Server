@@ -101,7 +101,7 @@ export class UsersController {
     // return token;
     res.setHeader('token', req.user.access_token);
     const token = req.user.access_token;
-    res.redirect(`https://localhost:3000/home/?access_token=${token}`);
+    res.redirect(`https://localhost:3000/?access_token=${token}`);
     // return res.send(req.user.access_token);
     // return res.redirect('/');
   }
