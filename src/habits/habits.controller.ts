@@ -27,9 +27,11 @@ export class HabitsController {
     return this.habitsService.upload({ ...body, userId: Number(id) });
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Post('findAll')
-  findAll(): Promise<Habit[]> {
-    return this.habitsService.findAll();
+  findAll(@Req() req: any): Promise<Habit[]> {
+    const { id } = req.user;
+    return this.habitsService.findAll(id);
   }
 
   @Post('findOne')

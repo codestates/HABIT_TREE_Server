@@ -23,8 +23,8 @@ export class HabitsService {
     return await this.habitsRepository.save(body);
   }
 
-  findAll(): Promise<Habit[]> {
-    return this.habitsRepository.find();
+  findAll(id: number): Promise<Habit[]> {
+    return this.habitsRepository.find({ id: id });
   }
 
   findOne(id: number): Promise<Habit> {
