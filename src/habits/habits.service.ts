@@ -24,7 +24,7 @@ export class HabitsService {
   }
 
   findAll(id: number): Promise<Habit[]> {
-    return this.habitsRepository.find({ id: id });
+    return this.habitsRepository.find({ userId: id });
   }
 
   findOne(id: number): Promise<Habit> {
