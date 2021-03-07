@@ -44,21 +44,26 @@ export class HabitsService {
      
    */
   async update(id: number): Promise<Habit> {
-    const result = await this.habitsRepository.findOneOrFail({
-      id: id,
-      clicked: 0,
-    });
-
-    result.pass++;
-    result.clicked = 1;
-    result.achieve = Math.ceil((result.pass / 28) * 100);
-
-    if (result.achieve === 100) {
-      this.habitsRepository.delete(result.id);
-      this.forestService.upload(result);
+    const result = await this.habitsRepository
+      .findOneOrFail({
+        id: id,
+        clicked: 0,
+      })
+      .catch((error) => error);
+    if (!result.id) {
       return result;
     } else {
-      return this.habitsRepository.save(result);
+      result.pass++;
+      result.clicked = 1;
+      result.achieve = Math.ceil((result.pass / 28) * 100);
+
+      if (result.achieve === 100) {
+        this.habitsRepository.delete(result.id);
+        this.forestService.upload(result);
+        return result;
+      } else {
+        return this.habitsRepository.save(result);
+      }
     }
   }
 }
