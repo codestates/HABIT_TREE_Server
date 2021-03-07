@@ -41,7 +41,7 @@ export class HabitsController {
 
   // habit id 받기
   @UseGuards(AuthGuard('jwt'))
-  @Delete('remove')
+  @Post('remove')
   remove(@Body('id') id: number): Promise<DeleteResult> {
     return this.habitsService.remove(id);
   }
