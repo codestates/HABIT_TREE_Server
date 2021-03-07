@@ -47,7 +47,7 @@ export class HabitsController {
   // habit id 받기
   @UseGuards(AuthGuard('jwt'))
   @Post('update')
-  update(@Body('id') id: number): Promise<Habit> {
+  update(@Body('id') id: number): Promise<Habit> || boolean {
     return this.habitsService.update(id);
   }
 }
