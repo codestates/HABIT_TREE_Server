@@ -53,10 +53,11 @@ export class HabitsController {
   @UseGuards(AuthGuard('jwt'))
   @Post('update')
   update(@Body('id') id: number): Promise<Habit> {
-    try {
-      return this.habitsService.update(id);
-    } catch (e) {
-      throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
-    }
+    // try {
+    //   return this.habitsService.update(id);
+    // } catch (e) {
+    //   throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
+    // }
+    return this.habitsService.update(id);
   }
 }
