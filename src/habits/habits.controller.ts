@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Post,
   Req,
   Res,
@@ -50,12 +52,11 @@ export class HabitsController {
   // habit id 받기
   @UseGuards(AuthGuard('jwt'))
   @Post('update')
-  async update(@Body('id') id: number, @Res() res): Promise<Habit | boolean> {
-    const result = await this.habitsService.update(id);
-    if (!result) {
-      res.status(400).send({ errorMessage: '하루에 두 번 누를 수 없습니다.' });
-    } else {
-      return result;
+  update(@Body('id') id: number): Promise<Habit> {
+    try {
+      return this.habitsService.update(id);
+    } catch (e) {
+      throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
     }
   }
 }
