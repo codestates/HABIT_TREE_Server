@@ -5,6 +5,7 @@ import {
   Get,
   Post,
   Req,
+  Res,
   UseGuards,
 } from '@nestjs/common';
 import { HabitsService } from './habits.service';
@@ -49,7 +50,12 @@ export class HabitsController {
   // habit id 받기
   @UseGuards(AuthGuard('jwt'))
   @Post('update')
-  update(@Body('id') id: number): Promise<Habit> {
-    return this.habitsService.update(id);
+  update(@Body('id') id: number, @Res() res): Promise<Habit | boolean> {
+    const result = this.habitsService.update(id);
+    if (!result) {
+      res.send(400, '하루에 두 번 누를 수 없습니다.');
+    } else {
+      return result;
+    }
   }
 }

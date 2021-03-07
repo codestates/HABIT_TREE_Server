@@ -43,22 +43,26 @@ export class HabitsService {
     만약 achieve가 100 이라면 habit에서 제거, forest에서 생성
      
    */
-  async update(id: number): Promise<Habit> {
+  async update(id: number): Promise<Habit | boolean> {
     const result = await this.habitsRepository.findOneOrFail({
       id: id,
       clicked: 0,
     });
 
-    result.pass++;
-    result.clicked = 1;
-    result.achieve = Math.ceil((result.pass / 28) * 100);
+    if (result) {
+      result.pass++;
+      result.clicked = 1;
+      result.achieve = Math.ceil((result.pass / 28) * 100);
 
-    if (result.achieve === 100) {
-      this.habitsRepository.delete(result.id);
-      this.forestService.upload(result);
-      return result;
+      if (result.achieve === 100) {
+        this.habitsRepository.delete(result.id);
+        this.forestService.upload(result);
+        return result;
+      } else {
+        return this.habitsRepository.save(result);
+      }
     } else {
-      return this.habitsRepository.save(result);
+      return false;
     }
   }
 }
