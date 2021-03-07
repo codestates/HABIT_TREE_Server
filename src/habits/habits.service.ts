@@ -44,7 +44,7 @@ export class HabitsService {
      
    */
   async update(id: number): Promise<Habit | boolean> {
-    const result = await this.habitsRepository.findOneOrFail({
+    const result = await this.habitsRepository.findOne({
       id: id,
       clicked: 0,
     });
