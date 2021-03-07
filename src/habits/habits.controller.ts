@@ -50,8 +50,8 @@ export class HabitsController {
   // habit id 받기
   @UseGuards(AuthGuard('jwt'))
   @Post('update')
-  update(@Body('id') id: number, @Res() res): Promise<Habit | boolean> {
-    const result = this.habitsService.update(id);
+  async update(@Body('id') id: number, @Res() res): Promise<Habit | boolean> {
+    const result = await this.habitsService.update(id);
     if (!result) {
       res.status(400).send({ errorMessage: '하루에 두 번 누를 수 없습니다.' });
     } else {
