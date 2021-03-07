@@ -1,11 +1,4 @@
-import {
-  IsEmail,
-  IsString,
-  MinLength,
-  MaxLength,
-  IsNumber,
-  IsDate,
-} from 'class-validator';
+import { IsString, IsNumber } from 'class-validator';
 
 export class ForestDto {
   @IsString()

@@ -2,10 +2,7 @@ import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
-import { LoginUsersDto, CreateUsersDto } from '../dto/users.dto';
 import { User } from 'src/entity/user.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 
 @Injectable()
 export class AuthService {
