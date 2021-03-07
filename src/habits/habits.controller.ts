@@ -53,7 +53,7 @@ export class HabitsController {
   update(@Body('id') id: number, @Res() res): Promise<Habit | boolean> {
     const result = this.habitsService.update(id);
     if (!result) {
-      res.send(400, '하루에 두 번 누를 수 없습니다.');
+      res.status(400).send({ errorMessage: '하루에 두 번 누를 수 없습니다.' });
     } else {
       return result;
     }
