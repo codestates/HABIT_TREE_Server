@@ -1,4 +1,5 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ForestService } from './forest.service';
 
 @Controller('forest')
@@ -10,8 +11,9 @@ export class ForestController {
     this.forestService.upload(body);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Post('findAll')
-  findAll(@Body('username') username: string): any {
-    return this.forestService.findAll(username);
+  findAll(@Req() req: any): any {
+    return this.forestService.findAll(req.user.id);
   }
 }

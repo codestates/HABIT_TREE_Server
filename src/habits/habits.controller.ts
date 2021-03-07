@@ -1,14 +1,5 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Post,
-  Req,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { HabitsService } from './habits.service';
-import { HabitDto } from '../dto/habits.dto';
 import { Habit } from 'src/entity/habits.entity';
 import { DeleteResult } from 'typeorm';
 import { AuthService } from 'src/auth/auth.service';
@@ -23,13 +14,15 @@ export class HabitsController {
   @UseGuards(AuthGuard('jwt'))
   @Post('upload')
   upload(@Req() req: any, @Body() body: any): Promise<Habit> {
-    const { id, username } = req.user;
+    const { id } = req.user;
     return this.habitsService.upload({ ...body, userId: Number(id) });
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Post('findAll')
-  findAll(): Promise<Habit[]> {
-    return this.habitsService.findAll();
+  findAll(@Req() req: any): Promise<Habit[]> {
+    const { id } = req.user;
+    return this.habitsService.findAll(id);
   }
 
   @Post('findOne')
@@ -39,7 +32,7 @@ export class HabitsController {
 
   // habit id 받기
   @UseGuards(AuthGuard('jwt'))
-  @Delete('remove')
+  @Post('remove')
   remove(@Body('id') id: number): Promise<DeleteResult> {
     return this.habitsService.remove(id);
   }
@@ -47,7 +40,7 @@ export class HabitsController {
   // habit id 받기
   @UseGuards(AuthGuard('jwt'))
   @Post('update')
-  update(@Body('id') id: number): Promise<Habit> || boolean {
+  update(@Body('id') id: number): Promise<Habit> {
     return this.habitsService.update(id);
   }
 }

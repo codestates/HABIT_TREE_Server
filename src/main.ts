@@ -2,12 +2,26 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import * as fs from 'fs';
+import * as morgan from 'morgan';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.enableCors({
-    origin: 'http://localhost:3001',
+  const httpsOptions = {
+    key: fs.readFileSync('/home/ubuntu/key.pem'),
+    cert: fs.readFileSync('/home/ubuntu/cert.pem'),
+  };
+  const app = await NestFactory.create(AppModule, {
+    httpsOptions,
   });
+
+  app.use(morgan('dev'));
+
+  app.enableCors({
+    origin: ['https://localhost:3000'],
+    methods: ['GET', 'POST', 'OPTIONS', 'DELETE'],
+    credentials: true,
+  });
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -25,6 +39,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(3000);
+  await app.listen(5000);
 }
 bootstrap();

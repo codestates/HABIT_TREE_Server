@@ -11,11 +11,10 @@ export class ForestService {
   ) {}
 
   async upload(body: object): Promise<Forest> {
-    console.log('제발');
     return await this.forestRepository.save(body);
   }
 
-  async findAll(username: string): Promise<Forest[]> {
-    return await this.forestRepository.find({ where: { username: username } });
+  async findAll(userId: number): Promise<Forest[]> {
+    return await this.forestRepository.find({ where: { userId: userId } });
   }
 }
