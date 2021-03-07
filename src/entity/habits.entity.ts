@@ -4,23 +4,11 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   ManyToOne,
-  AfterUpdate,
   JoinColumn,
   RelationId,
 } from 'typeorm';
-import {
-  Contains,
-  IsInt,
-  Length,
-  IsEmail,
-  IsFQDN,
-  IsDate,
-  Min,
-  Max,
-  IsNumber,
-} from 'class-validator';
+import { IsDate } from 'class-validator';
 import { User } from './user.entity';
-// import { User } from './user.entity';
 
 @Entity()
 export class Habit {

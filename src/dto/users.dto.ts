@@ -1,5 +1,4 @@
 import { IsEmail, IsString, MinLength, MaxLength } from 'class-validator';
-import { Unique } from 'typeorm';
 
 export class LoginUsersDto {
   @MinLength(2)

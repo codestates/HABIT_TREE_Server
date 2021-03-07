@@ -7,16 +7,7 @@ import {
   BeforeInsert,
   Unique,
 } from 'typeorm';
-import {
-  Contains,
-  IsInt,
-  Length,
-  IsEmail,
-  IsFQDN,
-  IsDate,
-  Min,
-  Max,
-} from 'class-validator';
+import { IsEmail, IsDate } from 'class-validator';
 import { Habit } from './habits.entity';
 import * as bcrypt from 'bcrypt';
 

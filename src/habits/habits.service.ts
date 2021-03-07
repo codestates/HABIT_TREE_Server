@@ -1,9 +1,8 @@
 import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Forest } from 'src/entity/forest.entity';
 import { Habit } from 'src/entity/habits.entity';
 import { ForestService } from 'src/forest/forest.service';
-import { DeepPartial, DeleteResult, Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { HabitDto } from '../dto/habits.dto';
 @Injectable()
 export class HabitsService {

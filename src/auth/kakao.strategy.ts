@@ -1,9 +1,5 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/entity/user.entity';
-import { UsersService } from 'src/users/users.service';
-import { Repository } from 'typeorm';
 import { AuthService } from './auth.service';
 import 'dotenv/config';
 

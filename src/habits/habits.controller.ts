@@ -1,17 +1,5 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  HttpException,
-  HttpStatus,
-  Post,
-  Req,
-  Res,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { HabitsService } from './habits.service';
-import { HabitDto } from '../dto/habits.dto';
 import { Habit } from 'src/entity/habits.entity';
 import { DeleteResult } from 'typeorm';
 import { AuthService } from 'src/auth/auth.service';
@@ -26,7 +14,7 @@ export class HabitsController {
   @UseGuards(AuthGuard('jwt'))
   @Post('upload')
   upload(@Req() req: any, @Body() body: any): Promise<Habit> {
-    const { id, username } = req.user;
+    const { id } = req.user;
     return this.habitsService.upload({ ...body, userId: Number(id) });
   }
 
@@ -53,11 +41,6 @@ export class HabitsController {
   @UseGuards(AuthGuard('jwt'))
   @Post('update')
   update(@Body('id') id: number): Promise<Habit> {
-    // try {
-    //   return this.habitsService.update(id);
-    // } catch (e) {
-    //   throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
-    // }
     return this.habitsService.update(id);
   }
 }
