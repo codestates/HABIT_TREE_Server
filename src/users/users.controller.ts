@@ -2,20 +2,17 @@ import {
   Body,
   Controller,
   Delete,
-  forwardRef,
   Get,
-  Inject,
-  Param,
   Post,
   Req,
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { AuthGuard, PassportStrategy } from '@nestjs/passport';
+import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from 'src/auth/auth.service';
 import { User } from 'src/entity/user.entity';
 import { UsersService } from './users.service';
-import { LoginUsersDto, CreateUsersDto } from '../dto/users.dto';
+import { CreateUsersDto } from '../dto/users.dto';
 const KakaoStrategy = require('passport-kakao').Strategy;
 const passport = require('passport');
 @Controller('users')
@@ -68,7 +65,7 @@ export class UsersController {
   @UseGuards(AuthGuard('jwt'))
   @Post('getHabits')
   findOneJoin(@Req() req: any): Promise<User> {
-    const { id, username } = req.user;
+    const { id } = req.user;
     return this.usersService.findOneJoin(id);
   }
 
@@ -82,27 +79,14 @@ export class UsersController {
   @UseGuards(AuthGuard('kakao'))
   @Get('kakaoLogin')
   kakaoLogin() {
-    console.log(1);
-    // passport.authenticate('kakao', (err, user, info) => {
-    //   if (err) console.log(2);
-    //   if (user) console.log(3);
-    //   if (info) console.log(4);
-    // });
-
-    // this.usersService.kakaoLogin();
-    // this.usersService.kakaoLogin();
+    console.log('kakaoLogin');
   }
 
   @UseGuards(AuthGuard('kakao'))
   @Get('callback')
   callback(@Req() req, @Res() res) {
-    // console.log(req.user.access_token);
-    // const token = req.user.access_token;
-    // return token;
     res.setHeader('token', req.user.access_token);
     const token = req.user.access_token;
-    res.redirect(`https://localhost:3000/?access_token=${token}`);
-    // return res.send(req.user.access_token);
-    // return res.redirect('/');
+    res.redirect(`https://habittree.tk/?access_token=${token}`);
   }
 }
