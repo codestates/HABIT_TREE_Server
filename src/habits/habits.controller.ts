@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
 import { HabitsService } from './habits.service';
 import { Habit } from 'src/entity/habits.entity';
 import { DeleteResult } from 'typeorm';

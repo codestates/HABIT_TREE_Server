@@ -1,10 +1,9 @@
-import { Body, Injectable, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { User } from 'src/entity/user.entity';
-import { getRepository, Repository } from 'typeorm';
-import { LoginUsersDto, CreateUsersDto } from '../dto/users.dto';
+import { Repository } from 'typeorm';
+import { CreateUsersDto } from '../dto/users.dto';
 @Injectable()
 export class UsersService {
   constructor(
@@ -38,10 +37,4 @@ export class UsersService {
       where: { id: id },
     });
   }
-
-  // @UseGuards(AuthGuard('kakao'))
-  // kakaoLogin() {
-  //   // console.log(code);
-  //   console.log('성공');
-  // }
 }
