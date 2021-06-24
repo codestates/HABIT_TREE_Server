@@ -7,8 +7,8 @@ import * as morgan from 'morgan';
 
 async function bootstrap() {
   const httpsOptions = {
-    key: fs.readFileSync('/home/ubuntu/key.pem'),
-    cert: fs.readFileSync('/home/ubuntu/cert.pem'),
+    key: fs.readFileSync('/Users/yoonkyungmin/key.pem'),
+    cert: fs.readFileSync('/Users/yoonkyungmin/cert.pem'),
   };
   const app = await NestFactory.create(AppModule, {
     httpsOptions,
